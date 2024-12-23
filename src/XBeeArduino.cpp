@@ -154,7 +154,7 @@ bool XBeeArduino::isConnected() {
  */
 void XBeeArduino::reset() {
     if (xbee_ != nullptr) {
-        return XBeeHardReset(xbee_);
+        (void)XBeeHardReset(xbee_);
     }
 }
 
@@ -165,7 +165,7 @@ void XBeeArduino::reset() {
  */
 bool XBeeArduino::setApiOptions(const uint8_t options) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeSetAPIOptions(xbee_, options) == API_SEND_SUCCESS;
+        return XBeeSetAPIOptions(xbee_, options);
     }
     return false;
 }
@@ -188,7 +188,7 @@ void XBeeArduino::onSendWrapper(XBee* xbee, void* data) {
  */
 bool XBeeArduino::applyChanges(void) {
 
-    return XBeeApplyChanges(xbee_) == API_SEND_SUCCESS;
+    return XBeeApplyChanges(xbee_);
 }
 
 /**
@@ -197,7 +197,7 @@ bool XBeeArduino::applyChanges(void) {
  */
 bool XBeeArduino::writeConfig(void) {
 
-    return XBeeWriteConfig(xbee_) == API_SEND_SUCCESS;
+    return XBeeWriteConfig(xbee_);
 }
 
 /**
@@ -207,7 +207,7 @@ bool XBeeArduino::writeConfig(void) {
  */
 bool XBeeArduino::setLoRaWANAppEUI(const char* value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetAppEUI(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetAppEUI(xbee_, value);
     }
     return false;
 }
@@ -219,7 +219,7 @@ bool XBeeArduino::setLoRaWANAppEUI(const char* value) {
  */
 bool XBeeArduino::setLoRaWANAppKey(const char* value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetAppKey(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetAppKey(xbee_, value);
     }
     return false;
 }
@@ -231,7 +231,7 @@ bool XBeeArduino::setLoRaWANAppKey(const char* value) {
  */
 bool XBeeArduino::setLoRaWANNwkKey(const char* value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetNwkKey(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetNwkKey(xbee_, value);
     }
     return false;
 }
@@ -243,7 +243,7 @@ bool XBeeArduino::setLoRaWANNwkKey(const char* value) {
  */
 bool XBeeArduino::getLoRaWANDevEUI(uint8_t* devEUI, uint8_t length) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRGetDevEUI(xbee_, devEUI, length) == API_SEND_SUCCESS;
+        return XBeeLRGetDevEUI(xbee_, devEUI, length);
     }
     return false;
 }
@@ -260,7 +260,7 @@ bool XBeeArduino::getLoRaWANDevEUI(uint8_t* devEUI, uint8_t length) {
  */
 bool XBeeArduino::setLoRaWANClass(const char value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetClass(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetClass(xbee_, value);
     }
     return false;
 }
@@ -277,7 +277,7 @@ bool XBeeArduino::setLoRaWANClass(const char value) {
  */
 bool XBeeArduino::setLoRaWANActivationMode(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetActivationMode(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetActivationMode(xbee_, value);
     }
     return false;
 }
@@ -294,7 +294,7 @@ bool XBeeArduino::setLoRaWANActivationMode(const uint8_t value) {
  */
 bool XBeeArduino::setLoRaWANADR(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetADR(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetADR(xbee_, value);
     }
     return false;
 }
@@ -311,7 +311,7 @@ bool XBeeArduino::setLoRaWANADR(const uint8_t value) {
  */
 bool XBeeArduino::setLoRaWANDataRate(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetDataRate(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetDataRate(xbee_, value);
     }
     return false;
 }
@@ -328,7 +328,7 @@ bool XBeeArduino::setLoRaWANDataRate(const uint8_t value) {
  */
 bool XBeeArduino::setLoRaWANRegion(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetRegion(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetRegion(xbee_, value);
     }
     return false;
 }
@@ -345,7 +345,7 @@ bool XBeeArduino::setLoRaWANRegion(const uint8_t value) {
  */
 bool XBeeArduino::setLoRaWANDutyCycle(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetDutyCycle(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetDutyCycle(xbee_, value);
     }
     return false;
 }
@@ -363,7 +363,7 @@ bool XBeeArduino::setLoRaWANDutyCycle(const uint8_t value) {
  */
 bool XBeeArduino::getLoRaWANSpecVersion(char* responseBuffer, uint8_t buffer_size) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRGetSpecVersion(xbee_, responseBuffer, buffer_size) == API_SEND_SUCCESS;
+        return XBeeLRGetSpecVersion(xbee_, responseBuffer, buffer_size);
     }
     return false;
 }
@@ -380,7 +380,7 @@ bool XBeeArduino::getLoRaWANSpecVersion(char* responseBuffer, uint8_t buffer_siz
  */
 bool XBeeArduino::setLoRaWANJoinRX1Delay(const uint32_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetJoinRX1Delay(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetJoinRX1Delay(xbee_, value);
     }
     return false;
 }
@@ -397,7 +397,7 @@ bool XBeeArduino::setLoRaWANJoinRX1Delay(const uint32_t value) {
  */
 bool XBeeArduino::setLoRaWANJoinRX2Delay(const uint32_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetJoinRX2Delay(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetJoinRX2Delay(xbee_, value);
     }
     return false;
 }
@@ -414,7 +414,7 @@ bool XBeeArduino::setLoRaWANJoinRX2Delay(const uint32_t value) {
  */
 bool XBeeArduino::setLoRaWANRX1Delay(const uint32_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetRX1Delay(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetRX1Delay(xbee_, value);
     }
     return false;
 }
@@ -431,7 +431,7 @@ bool XBeeArduino::setLoRaWANRX1Delay(const uint32_t value) {
  */
 bool XBeeArduino::setLoRaWANRX2Delay(const uint32_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetRX2Delay(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetRX2Delay(xbee_, value);
     }
     return false;
 }
@@ -448,7 +448,7 @@ bool XBeeArduino::setLoRaWANRX2Delay(const uint32_t value) {
  */
 bool XBeeArduino::setLoRaWANRX2DataRate(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetRX2DataRate(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetRX2DataRate(xbee_, value);
     }
     return false;
 }
@@ -465,7 +465,7 @@ bool XBeeArduino::setLoRaWANRX2DataRate(const uint8_t value) {
  */
 bool XBeeArduino::setLoRaWANRX2Frequency(const uint32_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetRX2Frequency(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetRX2Frequency(xbee_, value);
     }
     return false;
 }
@@ -482,7 +482,7 @@ bool XBeeArduino::setLoRaWANRX2Frequency(const uint32_t value) {
  */
 bool XBeeArduino::setLoRaWANTransmitPower(const uint8_t value) {
     if (moduleType_ == XBEE_LORA) {
-        return XBeeLRSetTransmitPower(xbee_, value) == API_SEND_SUCCESS;
+        return XBeeLRSetTransmitPower(xbee_, value);
     }
     return false;
 }

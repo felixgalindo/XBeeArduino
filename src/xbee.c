@@ -176,8 +176,9 @@ bool XBeeWriteConfig(XBee* self) {
     int status = apiSendAtCommandAndGetResponse(self, AT_WR, NULL, 0, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to Write Config\n");
+        return false;
     }
-    return status;
+    return true;
 }
 
 /**
@@ -198,8 +199,9 @@ bool XBeeApplyChanges(XBee* self) {
     int status = apiSendAtCommandAndGetResponse(self, AT_AC, NULL, 0, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to Apply Changes\n");
+        return false;
     }
-    return status;
+    return true;
 }
 
 /**
@@ -222,7 +224,8 @@ bool XBeeSetAPIOptions(XBee* self, const uint8_t value) {
     int status = apiSendAtCommandAndGetResponse(self, AT_AO, (const uint8_t[]){value}, 1, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to set API Options\n");
+        return false;
     }
-    return status;
+    return true;
 }
 

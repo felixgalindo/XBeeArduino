@@ -193,7 +193,7 @@ uint8_t XBeeLRSendData(XBee* self, const void* data) {
     // Send the frame
     int send_status = apiSendFrame(self, XBEE_API_TYPE_LR_TX_REQUEST, frame_data, 3 + packet->payloadSize);
     if (send_status != API_SEND_SUCCESS) {
-        return false;  // Failed to send the frame
+        return 0;  // Failed to send the frame
     }
 
     // Block and wait for the XBEE_API_TYPE_TX_STATUS frame
@@ -254,8 +254,9 @@ bool XBeeLRSetAppEUI(XBee* self, const char* value) {
     int status = apiSendAtCommandAndGetResponse(self, AT_AE, value, paramLength, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to set App EUI\n");
+        return false;
     }
-    return status;
+    return true;
 }
 
 /**
@@ -278,8 +279,9 @@ bool XBeeLRSetAppKey(XBee* self, const char* value) {
     int status = apiSendAtCommandAndGetResponse(self, AT_AK, value, paramLength, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to set App Key\n");
+        return false;
     }
-    return status;
+    return true;
 }
 
 /**
@@ -303,8 +305,9 @@ bool XBeeLRSetNwkKey(XBee* self, const char* value) {
     int status = apiSendAtCommandAndGetResponse(self, AT_NK, value, paramLength, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to set Nwk Key\n");
+        return false;
     }
-    return status;
+    return true; 
 }
 
 /**
@@ -327,8 +330,9 @@ bool XBeeLRSetClass(XBee* self, const char value) {
     int status = apiSendAtCommandAndGetResponse(self, AT_LC, (const uint8_t *) &value, 1, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to set Class\n");
+        return false;
     }
-    return status;
+    return true;
 }
 
 /**
@@ -477,7 +481,7 @@ bool XBeeLRSetJoinRX1Delay(XBee* self, const uint32_t value) {
     uint8_t responseLength;
     uint8_t paramLength = sizeof(value);
 
-    int status = apiSendAtCommandAndGetResponse(self, AT_J1, &value, paramLength, response, &responseLength, 5000);
+    int status = apiSendAtCommandAndGetResponse(self, AT_J1, (const uint8_t*)&value, paramLength, response, &responseLength, 5000);
 
     if (status != API_SEND_SUCCESS) {
         XBEEDebugPrint("Failed to set Join RX1 Delay\n");
@@ -500,7 +504,7 @@ bool XBeeLRSetJoinRX2Delay(XBee* self, const uint32_t value) {
     uint8_t responseLength;
     uint8_t paramLength = sizeof(value);
 
-    int status = apiSendAtCommandAndGetResponse(self, AT_J2, &value, paramLength, response, &responseLength, 5000);
+    int status = apiSendAtCommandAndGetResponse(self, AT_J2, (const uint8_t*)&value, paramLength, response, &responseLength, 5000);
 
     if (status != API_SEND_SUCCESS) {
         XBEEDebugPrint("Failed to set Join RX2 Delay\n");
@@ -523,7 +527,7 @@ bool XBeeLRSetRX1Delay(XBee* self, const uint32_t value) {
     uint8_t responseLength;
     uint8_t paramLength = sizeof(value);
 
-    int status = apiSendAtCommandAndGetResponse(self, AT_D1, &value, paramLength, response, &responseLength, 5000);
+    int status = apiSendAtCommandAndGetResponse(self, AT_D1, (const uint8_t*)&value, paramLength, response, &responseLength, 5000);
 
     if (status != API_SEND_SUCCESS) {
         XBEEDebugPrint("Failed to set RX1 Delay\n");
@@ -546,7 +550,7 @@ bool XBeeLRSetRX2Delay(XBee* self, const uint32_t value) {
     uint8_t responseLength;
     uint8_t paramLength = sizeof(value);
 
-    int status = apiSendAtCommandAndGetResponse(self, AT_D2, &value, paramLength, response, &responseLength, 5000);
+    int status = apiSendAtCommandAndGetResponse(self, AT_D2, (const uint8_t*)&value, paramLength, response, &responseLength, 5000);
 
     if (status != API_SEND_SUCCESS) {
         XBEEDebugPrint("Failed to set RX2 Delay\n");
@@ -569,7 +573,7 @@ bool XBeeLRSetRX2DataRate(XBee* self, const uint8_t value) {
     uint8_t responseLength;
     uint8_t paramLength = sizeof(value);
 
-    int status = apiSendAtCommandAndGetResponse(self,AT_XD, &value, paramLength, response, &responseLength, 5000);
+    int status = apiSendAtCommandAndGetResponse(self,AT_XD, (const uint8_t*)&value, paramLength, response, &responseLength, 5000);
 
     if (status != API_SEND_SUCCESS) {
         XBEEDebugPrint("Failed to set RX2 Data Rate\n");
@@ -677,8 +681,9 @@ bool XBeeLRSetChannelsMask(XBee* self, const char* value) {
     int status = apiSendAtCommandAndGetResponse(self, AT_CM, value, paramLength, response, &responseLength, 5000);
     if(status != API_SEND_SUCCESS){
         XBEEDebugPrint("Failed to set Channels Mask\n");
+        return false;
     }
-    return status;
+    return true;
 }
 
 // XBeeLR private functions
