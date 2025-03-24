@@ -45,7 +45,8 @@ extern "C"
 #include "xbee.h"
 #include "config.h"
 
-#define CONNECTION_TIMEOUT_MS 6000
+//Minimum Connection Timeout required for EU868 Join is 8000ms
+#define CONNECTION_TIMEOUT_MS 8000 
 #define SEND_DATA_TIMEOUT_MS 10000
 
 // Structure for XBee LR LoRaWAN packet

@@ -133,20 +133,23 @@ void XBeeLRProcess(XBee* self) {
  */
 bool XBeeLRConnect(XBee* self) {
     // Implement XBeeLR specific connection logic 
+    XBEEDebugPrint("Join Request Sent...\n");
     SendJoinReqApiFrame(self);
 
     // Start the timeout timer
     uint32_t startTime = portMillis();
 
-    while ((portMillis() - startTime) < CONNECTION_TIMEOUT_MS) {
-        if (XBeeLRConnected(self)) {
-            XBEEDebugPrint("Successfully Joined\n");
-            return true; // Successfully joined
-        }
+    //Delay until CONNECTION_TIMEOUT_MS Time has elapsed
+    while((portMillis() - startTime) < CONNECTION_TIMEOUT_MS){}
 
-        portDelay(500); // Delay between checks 
+    XBEEDebugPrint("Checking Join Status...\n");
+    //Check Join Status only once per Join Request
+    if (XBeeLRConnected(self)) {
+        XBEEDebugPrint("Successfully Joined\n");
+        return true; // Successfully joined
     }
 
+    portDelay(500); // Delay between checks 
     XBEEDebugPrint("Failed to Join\n");
     return false; // Timeout reached without successful join
 }
